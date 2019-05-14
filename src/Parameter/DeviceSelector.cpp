@@ -1,11 +1,10 @@
-#include "DeviceSelector.h"
+#include "../Parameter/DeviceSelector.h"
 
-extern u8 led_pin = 0;
-extern u8 sys_led_pin = 0;
+extern u8 nums_led_channel_available = 4;
+extern u8 led_pins[NUM_LED_STRIP] = {0, 0, 0, 0};
+extern u8 sys_led = 0;
 
 extern u32 led_color_correction = 0xFFFFFFFF;
-
-extern bool support_wrgb = 0;
 
 extern u8 brightness_button = 0;
 extern u8 flash_button = 0;

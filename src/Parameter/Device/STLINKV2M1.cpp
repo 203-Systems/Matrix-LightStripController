@@ -4,12 +4,14 @@ void loadConfigSTLINKV2M1()
 {
 
   //LED
-  led_pin = 29;
-  sys_led_pin = 9;
+  nums_led_channel_available = 4;
+  led_pins[0] = PB6; //RST
+  led_pins[1] = PB11; //SWIM
+  led_pins[2] = PA5; //SWCLK
+  led_pins[3] = PB14; //SWDIO
+  sys_led = PA9;
 
   led_color_correction = 0xFFFFFF;
-
-  support_wrgb = false;
 
   brightness_button = 0;
 

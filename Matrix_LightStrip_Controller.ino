@@ -30,9 +30,10 @@ MIDI Midi;
 LED LED;
 Timer mainTimer;
 
+bool LEDstate = false;
+
 void setup()
 {
-  digitalWrite(led_pin,LOW);
   loadDeviceConfig();
   //setupEEPROM();
   //variableLoad();
@@ -47,14 +48,16 @@ void setup()
   mainTimer.recordCurrent();
   while(!USBComposite.isReady())
   {
-    if (mainTimer.isLonger(10000))
+    if (mainTimer.tick(200))
     {
-      LED.setHEX(0,0xff0000);
-      LED.update();
+      LEDstate = !LEDstate;
+      setSystemLED(LEDstate);
     }
   }
-  LED.fill(0x000000);
-  LED.update();
+
+  setSystemLED(1);
+
+  LED.rainbow();
 
   #ifdef DEBUG
   CompositeSerial.println("Enter Main Program");
@@ -67,6 +70,7 @@ void loop()
 
   if (mainTimer.tick(16))
   {
+    if(stfu)
     Midi.offScan();
     LED.update();
   }

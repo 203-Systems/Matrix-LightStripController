@@ -4,6 +4,7 @@
 extern u8 brightness = 255;
 extern u16 max_mAh = 1000;
 extern u8 fps = 60;
+extern u8 stfu = 2;
 
 extern u32 palette[1][128] =     //WRGB Colour Palette
 {{            //LaunchpadColorPalette

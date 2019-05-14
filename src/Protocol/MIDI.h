@@ -22,7 +22,7 @@ public:
   void offScan();
 
 private:
-  s8 offMap[128];
+  s8 offMap[NUM_LED_STRIP][128];
 };
 
 #endif

@@ -56,15 +56,13 @@ typedef volatile const int64_t vsc64;
 
 //DeviceInfo
 
-#define DEBUG
+//#define DEBUG
 
 #define DEVICENAME "LightStrip Controller by 203"
 #define MAUNFACTURERNAME "203 Industries"
 #define SERIALSTRING "Thanks for using."
 #define VID  0x0203
 #define PID  0x0801
-
-#define __STM32F1C__
 
 #define DEVICE_SERIAL_1   *(u32 *) (0x1FFFF7E8)
 #define DEVICE_SERIAL_2   *(u32 *) (0x1FFFF7E8+0x04)
@@ -79,5 +77,6 @@ typedef volatile const int64_t vsc64;
 
 //LED
 #define NUM_LEDS 128
+#define NUM_LED_STRIP 4
 
 #endif

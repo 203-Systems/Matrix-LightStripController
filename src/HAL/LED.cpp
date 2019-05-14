@@ -17,12 +17,32 @@ LED::LED()
 
 void LED::init()
 {
-  switch(led_pin)
-  {
-    case 29:
-    FastLED.addLeds<NEOPIXEL, 29>(leds, NUM_LEDS);
-    break;
-  }
+  // for(u8 n; n < nums_led_channel_available; n++)
+  // {
+  //   switch(led_pins[n])
+  //   {
+  //     case PB6:
+  //     FastLED.addLeds<NEOPIXEL, PB6>(leds[n], NUM_LEDS);
+  //     break;
+  //     case PB11:
+  //     FastLED.addLeds<NEOPIXEL, PB11>(leds[n], NUM_LEDS);
+  //     break;
+  //     case PA5:
+  //     FastLED.addLeds<NEOPIXEL, PA5>(leds[n], NUM_LEDS);
+  //     break;
+  //     case PB14:
+  //     FastLED.addLeds<NEOPIXEL, PB14>(leds[n], NUM_LEDS);
+  //     break;
+  //   }
+  // }
+
+//For STLINK V2
+  //pinMode(PB10, INPUT_FLOATING);
+  FastLED.addLeds<NEOPIXEL, PB6>(leds[0], NUM_LEDS);
+  FastLED.addLeds<NEOPIXEL, PB11>(leds[1], NUM_LEDS);
+  FastLED.addLeds<NEOPIXEL, PA5>(leds[2], NUM_LEDS);
+  FastLED.addLeds<NEOPIXEL, PB14>(leds[3], NUM_LEDS);
+
 
   FastLED.setBrightness(brightness);
   FastLED.setCorrection(led_color_correction);
@@ -42,75 +62,35 @@ void LED::dynamicBrightness(u16 mah)
   FastLED.setMaxPowerInVoltsAndMilliamps(5,mah);
 }
 
-void LED::fill(u32 WRGB, bool overlay /*= false*/)
+void LED::fill(u32 WRGB)
 {
-  //fill_solid(leds,NUM_TOTAL_LEDS,CRGB::Black);
-  for(int i = 0; i < NUM_LEDS; i++)
-  {
-      leds[i] = WRGB;
-  }
-  //FastLED.show();
+  fill_solid(leds[0], 128, WRGB);
+  fill_solid(leds[1], 128, WRGB);
+  fill_solid(leds[2], 128, WRGB);
+  fill_solid(leds[3], 128, WRGB);
 }
 
-// void LED::setLED(INDEXMODE indexmode, LEDMODE ledmode, u8 xy = 0, u32 p1 = 0, u8 p2 = 0, u8 p3 = 0, u8 p4 = 0)
-// {
-//   u8 index = x;
-//   if(ledmode == XY)
-//   u8 index = xyToIndex(xy);
-//
-//   switch (ledmode)
-//   {
-//     case off:
-//     LED::Off(index);
-//     break;
-//     case on:
-//     LED::On(index);
-//     break;
-//     case w:
-//     LED::setW(index, p1);
-//     break;
-//     case rgb:
-//     LED::setRGB(index, p1, p2, p3);
-//     break;
-//     case wrgb:
-//     LED::setWRGB(index, p1, p2, p3, p4);
-//     break;
-//     case hex:
-//     LED::setHEX(index, p1);
-//     break;
-//     case palette:
-//     LED::setPalette(index, p1, p2);
-//     break;
-//   }
-// }
-
-// Index
-void LED::off(s16 index, bool overlay /*= false*/)
+void LED::off(u8 channel, s16 index)
 {
-  LED::setHEX(index, 0, overlay);
+  LED::setHEX(channel, index, 0);
 }
 
-void LED::on(s16 index, bool overlay /*= false*/)
+void LED::on(u8 channel, s16 index)
 {
-  LED::setHEX(index, 0xFFFFFFFF, overlay);
+  LED::setHEX(channel, index, 0xFFFFFFFF);
 }
 
-void LED::setW(s16 index, u8 w, bool overlay /*= false*/)
+void LED::setW(u8 channel, s16 index, u8 w)
 {
-  LED::setHEX(index, w * 0x10000 + w * 0x100 + w, overlay);
+  LED::setHEX(channel, index, w * 0x10000 + w * 0x100 + w);
 }
 
-void LED::setRGB(s16 index, u8 r, u8 g, u8 b, bool overlay /*= false*/)
+void LED::setRGB(u8 channel, s16 index, u8 r, u8 g, u8 b)
 {
-  LED::setHEX(index, r * 0x10000 + g * 0x100 + b, overlay);
+  LED::setHEX(channel, index, r * 0x10000 + g * 0x100 + b);
 }
 
-void LED::setWRGB(s16 index, u8 w, u8 r, u8 g, u8 b, bool overlay /*= false*/)
-{
-  LED::setHEX(index, w * 0x1000000 + r * 0x10000 + g * 0x100 + b, overlay);
-}
-
-void LED::setHEX(s16 index, u32 hex, bool overlay /*= false*/, bool ignore_gamma /*= false*/)
+void LED::setHEX(u8 channel, s16 index, u32 hex)
 {
   #ifdef DEBUG
   CompositeSerial.print("LED Index \t");
@@ -122,12 +102,12 @@ void LED::setHEX(s16 index, u32 hex, bool overlay /*= false*/, bool ignore_gamma
   if(index < 0)
   return;
 
-  leds[index] = hex;
+  leds[channel][index] = hex;
 }
 
-void LED::setPalette(s16 index, u8 pick_palette, u8 colour, bool overlay /*= false*/)
+void LED::setPalette(u8 channel, s16 index, u8 pick_palette, u8 colour)
 {
-  LED::setHEX(index, palette[pick_palette][colour], overlay, true);
+  LED::setHEX(channel, index, palette[pick_palette][colour]);
 }
 
 
@@ -136,4 +116,19 @@ void LED::setPalette(s16 index, u8 pick_palette, u8 colour, bool overlay /*= fal
 void LED::update()
 {
   FastLED.show();
+}
+
+void LED::rainbow()
+{
+  for(int h = 0; h < 256; h += 5)
+  {
+    fill_rainbow(leds[0], NUM_LEDS, h, 5);
+    fill_rainbow(leds[1], NUM_LEDS, h, 5);
+    fill_rainbow(leds[2], NUM_LEDS, h, 5);
+    fill_rainbow(leds[3], NUM_LEDS, h, 5);
+    LED::update();
+    delay(10);
+  }
+  LED::fill(0);
+  LED::update();
 }

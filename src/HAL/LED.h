@@ -19,24 +19,24 @@ public:
   void init();
   void setBrightness(u8 b);
   void dynamicBrightness(u16 mah);
-  void fill(u32 WRGB, bool overlay = false);
+  void fill(u32 WRGB);
 
   // void setLED(INDEXMoDE indexmode, LEDMoDE ledmode, u8 x1, u8 y1, u32 p1, u8 p2, u8 p3, u8 p4);
 
   //Raw index - for BottomLED ，PoWERCoRD and raw strap.
-  void off(s16 index, bool overlay = false);
-  void on(s16 index, bool overlay = false);
-  void setW(s16 index, u8 w, bool overlay = false);
-  void setRGB(s16 index, u8 r, u8 g, u8 b, bool overlay = false);
-  void setWRGB(s16 index, u8 w, u8 r, u8 g, u8 b, bool overlay = false);
-  void setHEX(s16 index, u32 hex, bool overlay = false, bool ignore_gamma = false);
-  void setPalette(s16 index, u8 pick_palette, u8 colour, bool overlay = false);
+  void off(u8 channel, s16 index);
+  void on(u8 channel, s16 index);
+  void setW(u8 channel, s16 index, u8 w);
+  void setRGB(u8 channel, s16 index, u8 r, u8 g, u8 b);
+  void setHEX(u8 channel, s16 index, u32 hex);
+  void setPalette(u8 channel, s16 index, u8 pick_palette, u8 colour);
 
   //Processing
   void update();
+  void rainbow();
 
 private:
-  CRGB leds[NUM_LEDS];
+  CRGB leds[NUM_LED_STRIP][NUM_LEDS];
 };
 
 //extern LED LED;

@@ -27,22 +27,26 @@ void MIDI::noteOn(u8 channel, u8 note, u8 velocity)
 
   // if(channel == 5)
   //   channel = 1; //unipad support
-  if(channel = 0)
+  if(velocity == 0)
   {
-    if(velocity == 0)
-    {
-      MIDI::noteOff(channel, note, velocity);
-    }
-
-    LED.setPalette(note, channel, velocity);
-
-    offMap[note] = -1;
+    MIDI::noteOff(channel, note, velocity);
   }
+
+  LED.setPalette(channel, note, 0, velocity);
+
+  offMap[channel][note] = -1;
 }
 
 void MIDI::noteOff(u8 channel, u8 note, u8 velocity)
 {
-  offMap[note] = 2;
+  if(stfu)
+  {
+    offMap[channel][note] = stfu;
+  }
+  else
+  {
+    LED.off(channel,note);
+  }
 }
 
 void MIDI::handleNoteOff(unsigned int channel, unsigned int note, unsigned int velocity)
@@ -62,13 +66,16 @@ void MIDI::handleNoteOn(unsigned int channel, unsigned int note, unsigned int ve
 
 void MIDI::offScan()
 {
-  for(u8 note = 0; note < 128; note ++)
+  for(u8 channel = 0; channel < nums_led_channel_available; channel++)
   {
-    if(offMap[note] != -1)
+    for(u8 note = 0; note < 128; note ++)
     {
-      if(offMap[note] == 0)
-      LED.off(note);
+      if(offMap[channel][note] != -1)
+      {
+        if(offMap[channel][note] == 0)
+        LED.off(channel,note);
+      }
+      offMap[channel][note] --;
     }
-    offMap[note] --;
   }
 }

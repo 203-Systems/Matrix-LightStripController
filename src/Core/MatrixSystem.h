@@ -8,16 +8,18 @@
 #include <USBComposite.h>
 #include <USBMIDI.h>
 #include <FastLED.h>
-#include "../HAL/LED.h"
-#include "../Protocol/MIDI.h"
 #include "../Parameter/MatrixVariable.h"
 #include "../Parameter/MatrixParameter.h"
 #include "../Parameter/DeviceSelector.h"
+#include "../HAL/LED.h"
+#include "../Protocol/MIDI.h"
 
 void bootDevice();
 
 void setupUSB();
 void setupHardware();
+void setSystemLED(s8 state);
+
 
 
 #endif

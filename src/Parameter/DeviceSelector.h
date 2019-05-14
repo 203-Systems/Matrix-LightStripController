@@ -3,13 +3,11 @@
 
 #include "../Parameter/MatrixParameter.h"
 
-
-extern u8 led_pin;
-extern u8 sys_led_pin;
+extern u8 nums_led_channel_available;
+extern u8 led_pins[NUM_LED_STRIP];
+extern u8 sys_led;
 
 extern u32 led_color_correction;
-
-extern bool support_wrgb;
 
 extern u8 brightness_button;
 extern u8 flash_button;

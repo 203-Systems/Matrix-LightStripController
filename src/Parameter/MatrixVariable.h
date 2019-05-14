@@ -9,6 +9,7 @@ extern u8 brightness;
 extern u16 max_mAh;
 extern u32 palette[1][128];
 extern u8 fps;
+extern u8 stfu;
 
 
 #endif
