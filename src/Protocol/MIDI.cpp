@@ -8,7 +8,7 @@ extern LED LED;
 
 // MIDI::MIDI()
 // {
-//
+
 // }
 
 void MIDI::noteOn(u8 channel, u8 note, u8 velocity)
@@ -23,29 +23,25 @@ void MIDI::noteOn(u8 channel, u8 note, u8 velocity)
   CompositeSerial.println(velocity);
   #endif
 
-  //LED.on(channel);
-
-  // if(channel == 5)
-  //   channel = 1; //unipad support
   if(velocity == 0)
   {
     MIDI::noteOff(channel, note, velocity);
   }
 
-  LED.setPalette(channel, note, 0, velocity);
+  LED.setPalette(channel % 4, note, channel / 2, velocity);
 
-  offMap[channel][note] = -1;
+  offMap[channel % 4][note] = -1;
 }
 
 void MIDI::noteOff(u8 channel, u8 note, u8 velocity)
 {
   if(stfu)
   {
-    offMap[channel][note] = stfu;
+    offMap[channel%4][note] = stfu;
   }
   else
   {
-    LED.off(channel,note);
+    LED.off(channel % 4,note);
   }
 }
 

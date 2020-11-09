@@ -1,25 +1,14 @@
 /*
 Project Matrix - LightStrip Controller
-Copyright © 203 Industries 2017–2019. All rights reserved.
-
-TODO
-EEPROM load KeyMap
-EEPROM sys stuff
-microsecond timer
-Play Animation
-Play Midi
-Play Text
-NexusRevamped while USB unreconized
-
+Copyright © 203 Industries 2017–2020. All rights reserved.
 */
+
 #include <Arduino.h>
 #include <USBMIDI.h>
 #include <USBComposite.h>
 #include <FastLED.h>
 #include "src/Parameter/MatrixVariable.h"
 #include "src/Parameter/MatrixParameter.h"
-#include "src/Core/MatrixSystem.h"
-//#include "../Serials.h"
 #include "src/Core/MatrixSystem.h"
 #include "src/HAL/LED.h"
 #include "src/HAL/Timer.h"
@@ -63,6 +52,7 @@ void setup()
   CompositeSerial.println("Enter Main Program");
   #endif
 }
+
 
 void loop()
 {

@@ -8,7 +8,7 @@
 #include "../Parameter/MatrixParameter.h"
 #include "../Core/MatrixSystem.h"
 
-class MIDI: public USBMidi
+class MIDI: public USBMIDI
 {
 public:
   //MIDI();
