@@ -1,6 +1,7 @@
 #ifndef DEVICE_SELECTOR_H
 #define DEVICE_SELECTOR_H
 
+#include <Arduino.h>
 #include "../Parameter/MatrixParameter.h"
 
 extern u8 nums_led_channel_available;

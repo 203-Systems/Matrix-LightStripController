@@ -6,6 +6,7 @@ EEPROMClass EEPROM_SYS;
 
 extern LED LED;
 extern MIDI Midi;
+extern USBCompositeSerial CompositeSerial;
 
 void setupUSB()
 {
@@ -14,11 +15,10 @@ void setupUSB()
   USBComposite.setProductId(PID);
 
   USBComposite.setManufacturerString(MAUNFACTURERNAME);
-  //USBComposite.setProductString(DEVICENAME);
-  //USBComposite.setSerialString(SERIALSTRING);
+  USBComposite.setSerialString(SERIALSTRING);
 
   Midi.registerComponent();
-  CompositeSerial.registerComponent();
+  // CompositeSerial.registerComponent();
   USBComposite.begin();
 }
 

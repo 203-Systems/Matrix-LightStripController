@@ -17,31 +17,42 @@ LED::LED()
 
 void LED::init()
 {
-  // for(u8 n; n < nums_led_channel_available; n++)
-  // {
-  //   switch(led_pins[n])
-  //   {
-  //     case PB6:
-  //     FastLED.addLeds<NEOPIXEL, PB6>(leds[n], NUM_LEDS);
-  //     break;
-  //     case PB11:
-  //     FastLED.addLeds<NEOPIXEL, PB11>(leds[n], NUM_LEDS);
-  //     break;
-  //     case PA5:
-  //     FastLED.addLeds<NEOPIXEL, PA5>(leds[n], NUM_LEDS);
-  //     break;
-  //     case PB14:
-  //     FastLED.addLeds<NEOPIXEL, PB14>(leds[n], NUM_LEDS);
-  //     break;
-  //   }
-  // }
+  for(u8 n; n < nums_led_channel_available; n++)
+  {
+    switch(led_pins[n])
+    {
+      case PA1:
+      FastLED.addLeds<NEOPIXEL, PA1>(leds[n], NUM_LEDS);
+      break;
+      case PA2:
+      FastLED.addLeds<NEOPIXEL, PA2>(leds[n], NUM_LEDS);
+      break;
+      case PA3:
+      FastLED.addLeds<NEOPIXEL, PA3>(leds[n], NUM_LEDS);
+      break;
+      case PA4:
+      FastLED.addLeds<NEOPIXEL, PA4>(leds[n], NUM_LEDS);
+      break;
+      case PA5:
+      FastLED.addLeds<NEOPIXEL, PA5>(leds[n], NUM_LEDS);
+      break;
+      case PB6:
+      FastLED.addLeds<NEOPIXEL, PB6>(leds[n], NUM_LEDS);
+      break;
+      case PB11:
+      FastLED.addLeds<NEOPIXEL, PB11>(leds[n], NUM_LEDS);
+      break;
+      case PB14:
+      FastLED.addLeds<NEOPIXEL, PB14>(leds[n], NUM_LEDS);
+      break;
+    }
+  }
 
 //For STLINK V2
-  //pinMode(PB10, INPUT_FLOATING);
-  FastLED.addLeds<NEOPIXEL, PB6>(leds[0], NUM_LEDS);
-  FastLED.addLeds<NEOPIXEL, PB11>(leds[1], NUM_LEDS);
-  FastLED.addLeds<NEOPIXEL, PA5>(leds[2], NUM_LEDS);
-  FastLED.addLeds<NEOPIXEL, PB14>(leds[3], NUM_LEDS);
+  // FastLED.addLeds<NEOPIXEL, PB6>(leds[0], NUM_LEDS);
+  // FastLED.addLeds<NEOPIXEL, PB11>(leds[1], NUM_LEDS);
+  // FastLED.addLeds<NEOPIXEL, PA5>(leds[2], NUM_LEDS);
+  // FastLED.addLeds<NEOPIXEL, PB14>(leds[3], NUM_LEDS);
 
 
   FastLED.setBrightness(brightness);

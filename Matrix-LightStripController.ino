@@ -14,10 +14,10 @@ Copyright © 203 Industries 2017–2020. All rights reserved.
 #include "src/HAL/Timer.h"
 #include "src/Protocol/MIDI.h"
 
-//UIelement uielement;
 MIDI Midi;
 LED LED;
 Timer mainTimer;
+// USBCompositeSerial CompositeSerial;
 
 bool LEDstate = false;
 
