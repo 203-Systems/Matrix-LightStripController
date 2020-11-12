@@ -25,5 +25,7 @@ extern u32 eeprom_pagesize;
 
 void loadDeviceConfig();
 void loadConfigSTLINKV2M1();
+void loadConfigBluePill();
+void loadConfigBluePillPlus();
 
 #endif

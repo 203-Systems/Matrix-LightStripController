@@ -27,8 +27,14 @@ void loadDeviceConfig()
 
     switch(MATRIX_VERSION)
     {
-      case 1:
+      case 0x00:
       loadConfigSTLINKV2M1();
+      break;
+      case 0x10:
+      loadConfigBluePill();
+      break;
+      case 0x11:
+      loadConfigBluePillPlus();
       break;
 
     }
